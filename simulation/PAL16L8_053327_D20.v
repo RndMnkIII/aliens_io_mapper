@@ -28,38 +28,36 @@ module PAL16L8_053327_D20(
 	input D18_5, D21_17, RMRD, MAA, MA9, MA8, MA7, D21_12, C20_6, C20_3, D21_15, D21_16,
 	output D20_12, IOCS, CRAMCS, VRAMCS, OBJCS);
 	
-	parameter COMBDLY = 15; //tpd I, I/O typical 15ns max 30ns
-
 	wire R14b, R15b;
 
 	
 	//D20_12 = ~[(7800-7807) & ~RMRD & INIT |  (7C00-7FFF) & ~RMRD & INIT | (4000-7FFF)-(5F80-5F90)-(7800-7807)-(7C00-7FFF) & ~RMRD]
-	assign #COMBDLY D20_12 = ~((~D18_5 & ~RMRD & ~MAA & ~MA9 & ~MA8 & ~MA7 & ~C20_6 & ~C20_3 & ~D21_16) |
+	assign #10 D20_12 = ~((~D18_5 & ~RMRD & ~MAA & ~MA9 & ~MA8 & ~MA7 & ~C20_6 & ~C20_3 & ~D21_16) |
        (~D18_5 & ~RMRD & MAA & ~D21_16) |
        (~D18_5 & ~D21_17 & R14b & R15b));
 	   
 	//R14 = ~[[ADDR={0101 1111 100x xxxx:5F80-5F9F}] & ~AS]
-	assign #COMBDLY R14b = ~(MA9 & MA8 & MA7 & ~C20_6 & ~D21_15);
+	assign #7 R14b = ~(MA9 & MA8 & MA7 & ~C20_6 & ~D21_15);
 	
 	//IOCS  = ADDR={0101 1111 100x xxxx:5F80-5F90}
-	assign #COMBDLY IOCS = R14b;
+	assign #7 IOCS = R14b;
 	
 	// r15  = ~[[D18_5=0 & RMRD=0 & ADDR={0111 1000 0000 0xxx : 7800-7807}] | //051937 sprite generator attributes
 	//          [D18_5=0 & RMRD=0 & ADDR={0111 11xx xxxx xxxx : 7C00-7FFF}]]  //051960 sprite ram (8bytes per sprite * 128)
-	assign #COMBDLY R15b = ~((~D18_5 & ~RMRD & ~MAA & ~MA9 & ~MA8 & ~MA7 & ~C20_6 & ~C20_3 & ~D21_16) |
+	assign #7 R15b = ~((~D18_5 & ~RMRD & ~MAA & ~MA9 & ~MA8 & ~MA7 & ~C20_6 & ~C20_3 & ~D21_16) |
        (~D18_5 & ~RMRD & MAA & ~D21_16));
 	
 	// CRAMCS = ~[D18_5=0 & ~[ADDR={0000 0000 00xx xxxx:0000-03FF} & WOCO=1]]
 	// CRAMCS = ~[(0-03FF) & WOCO & ~AS] & [(0-03FF) & WOCO & ~AS ] with CLKQ risedge] D18_5 implies evaluate value with CLKQ risedge
-	assign #COMBDLY CRAMCS = ~(~D18_5 & ~D21_12);
+	assign #7 CRAMCS = ~(~D18_5 & ~D21_12);
 
 	//VRAMCS = ~[[D18_5=0] & 
 	//[[AS=0 & ADDR={0000 00xx xxxx xxxx:0000-03FF} & WOCO=1] | [AS=0 & ADDR={01xx xxxx xxxx xxxx:4000-7FFF}]] & 
 	//  ~[ADDR={0000 0000 00xx xxxx:0000-03FF} & WOCO=1] & ~[ADDR={0101 1111 100x xxxx:5F80-5F90}] &
 	//		   ~[[D18_5=0 & RMRD=0 & ADDR={0111 1000 0000 0xxx : 7800-7807}] | //051937 sprite generator attributes
 	//          [D18_5=0 & RMRD=0 & ADDR={0111 11xx xxxx xxxx : 7C00-7FFF}]]  //051960 sprite ram (8bytes per sprite * 128)
-	assign #COMBDLY VRAMCS = ~(~D18_5 & ~D21_17 & D21_12 & R14b & R15b); //4000-7FFF excludiding IOCS addresses and 7800-7807, 7C00-7FFF ranges???
+	assign #10 VRAMCS = ~(~D18_5 & ~D21_17 & D21_12 & R14b & R15b); //4000-7FFF excludiding IOCS addresses and 7800-7807, 7C00-7FFF ranges???
 	
 	//OBJCS = ~[~AS & ~RMRD & INIT & (7800-7807) |  ~AS & ~RMRD & INIT & (7000-7FFF)
-	assign #COMBDLY OBJCS = ~((~D18_5 & ~RMRD & ~MAA & ~MA9 & ~MA8 & ~MA7 & ~C20_6 & ~C20_3 & ~D21_16) | (~D18_5 & ~RMRD & MAA & ~D21_16));
+	assign #7 OBJCS = ~((~D18_5 & ~RMRD & ~MAA & ~MA9 & ~MA8 & ~MA7 & ~C20_6 & ~C20_3 & ~D21_16) | (~D18_5 & ~RMRD & MAA & ~D21_16));
 endmodule   

@@ -13,7 +13,7 @@ module PAL16L8_053326_D21(
 	input AS, BK4, INIT, MAF, MAE, MAD, MAC, MAB, MAA, WOCO,
 	output D21_12, WORK, BANK, D21_15, D21_16, D21_17, PROG, D21_19);
 	
-	parameter COMBDLY = 15; //tpd I, I/O typical 15ns max 30ns
+	parameter COMBDLY = 5;
 	
 	//D21_12 = ~[ADDR={0000 0000 00xx xxxx:0000-03FF} & WOCO=1]
 	assign #COMBDLY D21_12 = ~(~MAF & ~MAE & ~MAD & ~MAC & ~MAB & ~MAA & WOCO);

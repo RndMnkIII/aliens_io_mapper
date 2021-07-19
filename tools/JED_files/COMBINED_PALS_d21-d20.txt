@@ -1,0 +1,56 @@
+module PAL_053326_D21( 
+	input AS, BK4, INIT, MAF, MAE, MAD, MAC, MAB, MAA, WOCO,
+	output D21_12, WORK, BANK, D21_15, D21_16, D21_17, PROG, D21_19);
+	
+	assign #5 D21_12 = ~(~MAF & ~MAE & ~MAD & ~MAC & ~MAB & ~MAA & WOCO);
+	
+	assign #5 WORK = ~((~AS & ~MAF & ~MAE & ~MAD & ~MAC & ~MAB & MAA) |
+       (~AS & ~MAF & ~MAE & ~MAD & ~MAC & MAB) |
+       (~AS & ~MAF & ~MAE & ~MAD & MAC) |
+       (~AS & ~MAF & ~MAE & ~MAD & ~MAC & ~MAB & ~MAA & ~WOCO));
+	   
+	assign #5 BANK = ~(~AS & ~BK4 & ~MAF & ~MAE & MAD);
+	
+	assign #5 D21_15 = ~(~AS & ~MAF & MAE & ~MAD & MAC & MAB & MAA);
+	
+	assign #5 D21_16 = ~(INIT & ~MAF & MAE & MAD & MAC & MAB);
+	
+	assign #5 D21_17 = ~((~AS & ~MAF & MAE) |
+       (~AS & ~MAF & ~MAE & ~MAD & ~MAC & ~MAB & ~MAA & WOCO));
+	
+	assign #5 PROG = ~((~AS & MAF) |
+       (~AS & BK4 & ~MAF & ~MAE & MAD));
+	   
+	assign #5 D21_19 = ~((~AS & MAF) |
+       (~AS & BK4 & ~MAF & ~MAE & MAD) |
+       (~AS & ~MAF & ~MAE & ~MAD & ~MAC & ~MAB & MAA) |
+       (~AS & ~MAF & ~MAE & ~MAD & ~MAC & MAB) |
+       (~AS & ~MAF & ~MAE & ~MAD & MAC) |
+       (~AS & ~MAF & ~MAE & ~MAD & ~MAC & ~MAB & ~MAA & ~WOCO) |
+       (~AS & ~BK4 & ~MAF & ~MAE & MAD));
+endmodule
+
+module PAL_053327_D20( 
+	input D18_5, D21_17, RMRD, MAA, MA9, MA8, MA7, D21_12, C20_6, C20_3, D21_15, D21_16,
+	output D20_12, IOCS, CRAMCS, VRAMCS, OBJCS);
+	
+	wire R14, R15;
+	
+	assign #5 D20_12 = ~((~D18_5 & ~RMRD & ~MAA & ~MA9 & ~MA8 & ~MA7 & ~C20_6 & ~C20_3 & ~D21_16) |
+       (~D18_5 & ~RMRD & MAA & ~D21_16) |
+       (~D18_5 & ~D21_17 & R14 & R15));
+	   
+	assign #5 R14 = ~(MA9 & MA8 & MA7 & ~C20_6 & ~D21_15);
+	
+	assign #5 IOCS = R14;
+	
+	assign #5 R15 = ~((~D18_5 & ~RMRD & ~MAA & ~MA9 & ~MA8 & ~MA7 & ~C20_6 & ~C20_3 & ~D21_16) |
+       (~D18_5 & ~RMRD & MAA & ~D21_16));
+	   
+	assign #5 CRAMCS = ~(~D18_5 & ~D21_12);
+
+	assign #5 VRAMCS = ~(~D18_5 & ~D21_17 & D21_12 & R14 & R15);
+	
+	assign #5 OBJCS = ~((~D18_5 & ~RMRD & ~MAA & ~MA9 & ~MA8 & ~MA7 & ~C20_6 & ~C20_3 & ~D21_16) |
+       (~D18_5 & ~RMRD & MAA & ~D21_16));
+endmodule

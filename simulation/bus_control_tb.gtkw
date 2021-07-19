@@ -1,0 +1,80 @@
+[*]
+[*] GTKWave Analyzer v3.3.86 (w)1999-2017 BSI
+[*] Mon Jul 19 18:38:04 2021
+[*]
+[dumpfile] "/home/javier/aliens_io_mapper/simulation/bus_control_tb.lxt"
+[dumpfile_mtime] "Mon Jul 19 18:24:36 2021"
+[dumpfile_size] 49336106
+[savefile] "/home/javier/aliens_io_mapper/simulation/bus_control_tb.gtkw"
+[timestart] 0
+[size] 1920 1057
+[pos] -1 -1
+*-16.690033 231310 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[treeopen] bus_control_tb.
+[treeopen] bus_control_tb.ABC.
+[sst_width] 213
+[signals_width] 110
+[sst_expanded] 1
+[sst_vpaned_height] 312
+@28
+bus_control_tb.SYSCLK[0]
+bus_control_tb.CK12[0]
+[color] 2
+bus_control_tb.NCK12[0]
+bus_control_tb.CKE[0]
+bus_control_tb.CKQ[0]
+@22
+bus_control_tb.ADDR[15:0]
+@28
+bus_control_tb.RWb[0]
+bus_control_tb.AS[0]
+[color] 7
+bus_control_tb.VRAMCS[0]
+[color] 2
+bus_control_tb.DTAC[0]
+bus_control_tb.BK4[0]
+bus_control_tb.INIT[0]
+bus_control_tb.WOCO[0]
+bus_control_tb.RMRD[0]
+@200
+-
+-dbg
+@28
+[color] 7
+bus_control_tb.ABC.AS[0]
+bus_control_tb.ABC.D21_19[0]
+bus_control_tb.ABC.IOCS[0]
+bus_control_tb.ABC.C19_3[0]
+[color] 3
+bus_control_tb.ABC.CLK12[0]
+[color] 2
+bus_control_tb.ABC.D18_9[0]
+bus_control_tb.ABC.D21_17[0]
+[color] 3
+bus_control_tb.ABC.CQ[0]
+[color] 2
+bus_control_tb.ABC.D18_5[0]
+bus_control_tb.ABC.VRAMCS[0]
+@200
+-
+@28
+[color] 3
+bus_control_tb.ABC.CE[0]
+[color] 3
+bus_control_tb.ABC.CQ[0]
+bus_control_tb.ABC.D19_3[0]
+bus_control_tb.ABC.D20_12[0]
+bus_control_tb.ABC.C20_8[0]
+bus_control_tb.ABC.C19_6[0]
+@29
+[color] 3
+bus_control_tb.ABC.CLK12n[0]
+@28
+[color] 6
+bus_control_tb.ABC.VRAMCS[0]
+[color] 7
+bus_control_tb.ABC.AS[0]
+[color] 2
+bus_control_tb.ABC.DTAC[0]
+[pattern_trace] 1
+[pattern_trace] 0
