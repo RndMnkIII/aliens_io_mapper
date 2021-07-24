@@ -1,0 +1,38 @@
+[*]
+[*] GTKWave Analyzer v3.3.86 (w)1999-2017 BSI
+[*] Tue Jul 20 19:04:32 2021
+[*]
+[dumpfile] "/home/javier/aliens_io_mapper/tools/ADDR_DATA_AS_DTAC_VRAMCS01.lxt"
+[dumpfile_mtime] "Tue Jul 20 19:01:42 2021"
+[dumpfile_size] 115941
+[savefile] "/home/javier/aliens_io_mapper/tools/ADDR_DATA_AS_DTAC_VRAMCS01.gtkw"
+[timestart] 66432000
+[size] 1000 600
+[pos] 614 -110
+*-19.000000 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[sst_width] 213
+[signals_width] 110
+[sst_expanded] 1
+[sst_vpaned_height] 151
+@28
+ADDR_DATA_AS_DTAC_VRAMCS01.SYSCLK[0]
+ADDR_DATA_AS_DTAC_VRAMCS01.NCLK12[0]
+[color] 1
+ADDR_DATA_AS_DTAC_VRAMCS01.CKE[0]
+[color] 3
+ADDR_DATA_AS_DTAC_VRAMCS01.CKQ[0]
+@22
+ADDR_DATA_AS_DTAC_VRAMCS01.ADDR[15:0]
+ADDR_DATA_AS_DTAC_VRAMCS01.DATA[7:0]
+@29
+[color] 5
+ADDR_DATA_AS_DTAC_VRAMCS01.RWb[0]
+@28
+[color] 6
+ADDR_DATA_AS_DTAC_VRAMCS01.VRAMCS2[0]
+[color] 2
+ADDR_DATA_AS_DTAC_VRAMCS01.DTAC2[0]
+[color] 3
+ADDR_DATA_AS_DTAC_VRAMCS01.AS2[0]
+[pattern_trace] 1
+[pattern_trace] 0

@@ -32,8 +32,8 @@ module DFF2
 	always @(posedge clk or negedge Sn) 
 	begin
 	 if(!Sn) //Preset signal active low
-		Q <= #13 1'b1;  //74ALS74
+		Q <= #5 1'b1;  //74ALS74
 	 else 
-	 	Q <= #13 D;  //74ALS74
+	 	Q <= #25 D;  //74ALS74
 	end 
 endmodule

@@ -1,6 +1,6 @@
 `default_nettype none
 `timescale 1 ns / 100 ps
-//iverilog bus_control.v PAL16L8_053326_D21.v PAL16L8_053327_D20.v DFF2.v
+//iverilog bus_control.v k053326_D21.v k053327_D20.v DFF2.v
 //7C00-7FFF, 7800-7807 Sprite data RAM k051960 1024 Bytes
 //4000-7FFF VRAM
 //   -> 4000-47ff LAYER FIX TILEMAP (ATTR.)
@@ -52,31 +52,37 @@ module BusControl
 	
 	assign #5 CLK12n = ~CLK12;
 
-	assign #10 C20_6 = ADDR[6] | ADDR[5];
+	assign #12 C20_6 = ADDR[6] | ADDR[5];
 	
-	assign #10 C20_3 = ADDR[4] | ADDR[3];
+	assign #12 C20_3 = ADDR[4] | ADDR[3];
 	
-	assign #5 C19_3 = D21_19 & IOCS;
+	assign #10 C19_3 = D21_19 & IOCS;
 	
 	assign #5 ASn = ~AS;
 	
-	PAL16L8_053326_D21 D21(.AS(AS), .BK4(BK4), .INIT(INIT), .MAF(ADDR[15]), .MAE(ADDR[14]), .MAD(ADDR[13]), .MAC(ADDR[12]), .MAB(ADDR[11]), .MAA(ADDR[10]), .WOCO(WOCO),
-	                       .D21_12(D21_12), .WORK(WORK), .BANK(BANK), .D21_15(D21_15), .D21_16(D21_16), .D21_17(D21_17), .PROG(PROG), .D21_19(D21_19));
-	
+	k053326_D21 D21 (
+	     .i1(AS), .i2(BK4), .i3(INIT), 
+	     .i4(ADDR[15]), .i5(ADDR[14]), .i6(ADDR[13]), .i7(ADDR[12]), .i8(ADDR[11]), .i9(ADDR[10]), .i11(WOCO),
+	     .o12(D21_12), .o13(WORK), .o14(BANK), .o15(D21_15), .o16(D21_16), .o17(D21_17), .o18(PROG), .o19(D21_19)
+	);
+	//PAL16L8_053326_D21 D21(.AS(AS), .BK4(BK4), .INIT(INIT), .MAF(ADDR[15]), .MAE(ADDR[14]), .MAD(ADDR[13]), .MAC(ADDR[12]), .MAB(ADDR[11]), .MAA(ADDR[10]), .WOCO(WOCO),
+	//                       .D21_12(D21_12), .WORK(WORK), .BANK(BANK), .D21_15(D21_15), .D21_16(D21_16), .D21_17(D21_17), .PROG(PROG), .D21_19(D21_19));
 
 	DFF2 D18_1( .clk(CQ), .D(D21_17), .Sn(ASn), .Q(D18_5));
 	
-
-	
 	DFF2 D18_2( .clk(CLK12), .D(C19_3), .Sn(ASn), .Q(D18_9));
-	
-	PAL16L8_053327_D20 D20(.D18_5(D18_5), .D21_17(D21_17), .RMRD(RMRD), .MAA(ADDR[10]), .MA9(ADDR[9]), .MA8(ADDR[8]), .MA7(ADDR[7]), 
-	                       .D21_12(D21_12), .C20_6(C20_6), .C20_3(C20_3), .D21_15(D21_15), .D21_16(D21_16),
-	                       .D20_12(D20_12), .IOCS(IOCS), .CRAMCS(CRAMCS), .VRAMCS(VRAMCS), .OBJCS(OBJCS));
+
+	k053327_D20 D20(
+	     .i1(D18_5), .i2(D21_17), .i3(RMRD), .i4(ADDR[10]), .i5(ADDR[9]), .i6(ADDR[8]), .i7(ADDR[7]), .i8(D21_12), .i9(C20_6), .i11(C20_3), .i13(D21_15), .i16(D21_16),
+	     .o12(D20_12), .o14(IOCS), .o17(CRAMCS), .o18(VRAMCS), .o19(OBJCS)
+	);
+	//PAL16L8_053327_D20 D20(.D18_5(D18_5), .D21_17(D21_17), .RMRD(RMRD), .MAA(ADDR[10]), .MA9(ADDR[9]), .MA8(ADDR[8]), .MA7(ADDR[7]), 
+	//                       .D21_12(D21_12), .C20_6(C20_6), .C20_3(C20_3), .D21_15(D21_15), .D21_16(D21_16),
+	//                       .D20_12(D20_12), .IOCS(IOCS), .CRAMCS(CRAMCS), .VRAMCS(VRAMCS), .OBJCS(OBJCS));
 	
 	assign #5 D19_3 = ~(CE & CQ);
-	assign #10 C20_8 = D20_12 | D19_3;
-	assign #5 C19_6 = D18_9 & C20_8;
+	assign #12 C20_8 = D20_12 | D19_3;
+	assign #10 C19_6 = D18_9 & C20_8;
 	
 	//Generates Konami-2 CPU DTAC control input signal
 	DFF2 F11_1(.clk(CLK12n), .D(C19_6), .Sn(ASn), .Q(DTAC));
