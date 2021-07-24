@@ -33793,6 +33793,8 @@ begin
 end
 initial
 begin
-    #330000.0; $finish;
+    #30000;
+    BK4 = 1'b1;
+    #300000.0; $finish;
 end
 endmodule
